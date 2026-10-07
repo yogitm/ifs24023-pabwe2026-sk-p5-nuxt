@@ -4,6 +4,7 @@ import cashFlowApi, {
   type CashFlowStats,
 } from "../api/cashFlowApi";
 import { showErrorDialog, showSuccessDialog } from "../../../helpers/toolsHelper";
+import apiHelper from "../../../helpers/apiHelper";
 
 export interface CashFlowsState {
   cashFlows: CashFlow[];
@@ -89,7 +90,11 @@ export const useCashFlowsStore = defineStore("cashFlows", {
         this.cashFlows = cash_flows;
         this.stats = stats;
       } catch (error: any) {
-        showErrorDialog(error.message);
+        if (error?.message === "Belum melakukan autentikasi") {
+          apiHelper.putAccessToken("");
+        } else {
+          showErrorDialog(error.message);
+        }
       }
     },
 
@@ -99,7 +104,11 @@ export const useCashFlowsStore = defineStore("cashFlows", {
         this.cashFlow = cashFlow;
         this.isCashFlow = true;
       } catch (error: any) {
-        showErrorDialog(error.message);
+        if (error?.message === "Belum melakukan autentikasi") {
+          apiHelper.putAccessToken("");
+        } else {
+          showErrorDialog(error.message);
+        }
       }
     },
 
@@ -108,7 +117,11 @@ export const useCashFlowsStore = defineStore("cashFlows", {
         const labels = await cashFlowApi.getLabels();
         this.labels = labels;
       } catch (error: any) {
-        showErrorDialog(error.message);
+        if (error?.message === "Belum melakukan autentikasi") {
+          apiHelper.putAccessToken("");
+        } else {
+          showErrorDialog(error.message);
+        }
       }
     },
 

@@ -67,6 +67,8 @@ watch(
       usersStore.setIsProfile(false);
       if (profile) {
         router.push("/");
+      } else {
+        apiHelper.putAccessToken("");
       }
     }
   }
