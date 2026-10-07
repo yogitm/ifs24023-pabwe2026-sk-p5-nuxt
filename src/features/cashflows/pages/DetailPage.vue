@@ -39,9 +39,10 @@
     </div>
 
     <!-- Loading State -->
-    <div v-if="!cashFlow" class="p-16 text-center text-slate-400 bg-white rounded-3xl border border-slate-200/80">
+    <div v-if="!cashFlow" class="p-16 text-center text-slate-600 bg-white rounded-3xl border border-slate-200/80">
+      <h1 class="sr-only">Memuat Rincian Transaksi</h1>
       <Loader2 aria-hidden="true" :size="32" class="animate-spin text-emerald-600 mx-auto mb-2" />
-      <p class="text-sm font-semibold">Memuat rincian transaksi...</p>
+      <p class="text-sm font-semibold text-slate-700">Memuat rincian transaksi...</p>
     </div>
 
     <!-- Detail Content Card -->
@@ -61,13 +62,13 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-mono text-xs font-bold text-slate-400">#{{ cashFlow.id }}</span>
+              <span class="font-mono text-xs font-bold text-slate-600">#{{ cashFlow.id }}</span>
               <span
                 :class="[
                   'px-2.5 py-0.5 rounded-full text-xs font-bold',
                   cashFlow.type === 'inflow'
-                    ? 'bg-emerald-100 text-emerald-700'
-                    : 'bg-rose-100 text-rose-700',
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-rose-100 text-rose-800',
                 ]"
               >
                 {{ cashFlow.type === 'inflow' ? 'Pemasukan' : 'Pengeluaran' }}
@@ -81,13 +82,13 @@
 
         <!-- Big Amount Display -->
         <div class="text-left sm:text-right">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+          <span class="text-xs font-bold text-slate-600 uppercase tracking-wider block">
             Nominal Transaksi
           </span>
           <span
             :class="[
               'text-2xl sm:text-3xl font-black tracking-tight',
-              cashFlow.type === 'inflow' ? 'text-emerald-600' : 'text-rose-600',
+              cashFlow.type === 'inflow' ? 'text-emerald-700' : 'text-rose-700',
             ]"
           >
             {{ cashFlow.type === 'inflow' ? '+' : '-' }} {{ formatRupiah(cashFlow.nominal) }}
@@ -100,19 +101,19 @@
         <!-- Info Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
           <div>
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Sumber Dana</p>
+            <p class="text-xs font-bold text-slate-600 uppercase tracking-wider">Sumber Dana</p>
             <p class="text-sm font-extrabold text-slate-800 mt-1">
               {{ formatSource(cashFlow.source) }}
             </p>
           </div>
           <div>
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Waktu Dicatat</p>
+            <p class="text-xs font-bold text-slate-600 uppercase tracking-wider">Waktu Dicatat</p>
             <p class="text-sm font-semibold text-slate-700 mt-1">
               {{ formatDate(cashFlow.created_at) }}
             </p>
           </div>
           <div>
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pembaruan Terakhir</p>
+            <p class="text-xs font-bold text-slate-600 uppercase tracking-wider">Pembaruan Terakhir</p>
             <p class="text-sm font-semibold text-slate-700 mt-1">
               {{ formatDate(cashFlow.updated_at) }}
             </p>
@@ -121,7 +122,7 @@
 
         <!-- Description -->
         <div>
-          <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+          <h2 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
             Catatan / Deskripsi Transaksi
           </h2>
           <div class="p-5 rounded-2xl bg-white border border-slate-200/80 text-sm leading-relaxed text-slate-700 whitespace-pre-wrap">

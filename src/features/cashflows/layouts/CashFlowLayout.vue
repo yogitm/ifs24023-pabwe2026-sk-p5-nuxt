@@ -1,10 +1,11 @@
 <template>
-  <div v-if="!usersStore.profile" class="min-h-screen flex items-center justify-center bg-slate-50 text-slate-600">
+  <main v-if="!usersStore.profile" role="main" class="min-h-screen flex items-center justify-center bg-slate-50 text-slate-600">
     <div class="flex flex-col items-center gap-3">
+      <h1 class="sr-only">Memuat Delcom Cash Flow</h1>
       <div class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
-      <p class="text-sm font-medium">Memuat data pengguna...</p>
+      <p class="text-sm font-medium text-slate-700">Memuat data pengguna...</p>
     </div>
-  </div>
+  </main>
 
   <div v-else class="min-h-screen bg-slate-50 text-slate-800">
     <NavbarComponent @toggle-sidebar="sidebarOpen = !sidebarOpen" />

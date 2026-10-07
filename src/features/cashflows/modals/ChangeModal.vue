@@ -18,7 +18,7 @@
           </div>
           <div>
             <h3 id="change-modal-title" class="text-base font-bold text-slate-800">Ubah Catatan Arus Kas</h3>
-            <p class="text-xs text-slate-400">Perbarui rincian transaksi arus kas</p>
+            <p class="text-xs text-slate-600">Perbarui rincian transaksi arus kas</p>
           </div>
         </div>
         <button
@@ -26,7 +26,7 @@
           data-testid="close-change-modal-btn"
           aria-label="Tutup dialog"
           @click="handleClose"
-          class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors"
+          class="p-2 text-slate-600 hover:text-slate-800 rounded-xl hover:bg-slate-100 transition-colors"
         >
           <X aria-hidden="true" :size="18" />
         </button>
@@ -116,7 +116,7 @@
             Nominal (Rupiah) <span class="text-rose-500">*</span>
           </label>
           <div class="relative">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-600">
               Rp
             </span>
             <input
@@ -170,7 +170,7 @@
             data-testid="submit-change-btn"
             aria-label="Perbarui Transaksi"
             :disabled="isSubmitting"
-            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-amber-600 hover:bg-amber-700 disabled:opacity-50 transition-colors shadow-md shadow-amber-500/25"
+            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-amber-700 hover:bg-amber-800 disabled:opacity-50 transition-colors shadow-md shadow-amber-600/25"
           >
             <Loader2 v-if="isSubmitting" aria-hidden="true" :size="16" class="animate-spin" />
             <span>{{ isSubmitting ? 'Menyimpan...' : 'Perbarui Transaksi' }}</span>

@@ -17,7 +17,7 @@
           data-testid="reset-all-cashflows-btn"
           aria-label="Reset Semua Catatan Arus Kas"
           @click="handleDeleteAll"
-          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-rose-800 bg-rose-50 hover:bg-rose-100 transition-colors border border-rose-200/60"
         >
           <RotateCcw aria-hidden="true" :size="16" />
           <span>Reset Semua</span>
@@ -27,7 +27,7 @@
           data-testid="add-cashflow-btn"
           aria-label="Catat Transaksi Baru"
           @click="showAddModal = true"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-600/25 transition-all"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-md shadow-emerald-700/25 transition-all"
         >
           <Plus aria-hidden="true" :size="18" />
           <span>Catat Transaksi</span>
@@ -53,8 +53,8 @@
 
       <!-- Total Pemasukan -->
       <div class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
-        <div class="flex items-center justify-between text-emerald-600">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Pemasukan</span>
+        <div class="flex items-center justify-between text-emerald-700">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-600">Total Pemasukan</span>
           <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
             <ArrowDownLeft aria-hidden="true" :size="18" />
           </div>
@@ -62,13 +62,13 @@
         <p class="text-2xl font-black text-slate-800 mt-2 tracking-tight">
           {{ formatRupiah(statsInflow) }}
         </p>
-        <p class="text-xs mt-1 text-slate-400">Total seluruh arus dana masuk</p>
+        <p class="text-xs mt-1 text-slate-600">Total seluruh arus dana masuk</p>
       </div>
 
       <!-- Total Pengeluaran -->
       <div class="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
-        <div class="flex items-center justify-between text-rose-600">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Pengeluaran</span>
+        <div class="flex items-center justify-between text-rose-700">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-600">Total Pengeluaran</span>
           <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center">
             <ArrowUpRight aria-hidden="true" :size="18" />
           </div>
@@ -76,7 +76,7 @@
         <p class="text-2xl font-black text-slate-800 mt-2 tracking-tight">
           {{ formatRupiah(statsOutflow) }}
         </p>
-        <p class="text-xs mt-1 text-slate-400">Total seluruh beban pengeluaran</p>
+        <p class="text-xs mt-1 text-slate-600">Total seluruh beban pengeluaran</p>
       </div>
     </div>
 
@@ -86,7 +86,7 @@
         <!-- Live Search Input -->
         <div class="relative flex-1">
           <label for="search-cashflow-input" class="sr-only">Cari Transaksi</label>
-          <Search aria-hidden="true" :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search aria-hidden="true" :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
             id="search-cashflow-input"
@@ -156,8 +156,8 @@
       <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3">
         <Receipt aria-hidden="true" :size="28" />
       </div>
-      <h3 class="text-base font-bold text-slate-800">Belum Ada Catatan Transaksi</h3>
-      <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+      <h2 class="text-base font-bold text-slate-800">Belum Ada Catatan Transaksi</h2>
+      <p class="text-xs text-slate-600 mt-1 max-w-sm mx-auto">
         Belum ada catatan keuangan yang sesuai filter atau transaksi masih kosong.
       </p>
     </div>
@@ -172,7 +172,7 @@
 
       <div class="overflow-x-auto">
         <table class="w-full text-left text-sm">
-          <thead class="bg-slate-50/75 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+          <thead class="bg-slate-50/75 text-[11px] font-bold uppercase tracking-wider text-slate-600 border-b border-slate-100">
             <tr>
               <th scope="col" class="px-5 py-3.5">Tanggal</th>
               <th scope="col" class="px-5 py-3.5">Kategori / Keterangan</th>
@@ -188,7 +188,7 @@
               :data-testid="`cashflow-row-${item.id}`"
               class="hover:bg-slate-50/60 transition-colors"
             >
-              <td class="px-5 py-4 text-xs text-slate-400 whitespace-nowrap">
+              <td class="px-5 py-4 text-xs text-slate-600 whitespace-nowrap">
                 {{ formatDate(item.created_at) }}
               </td>
 
@@ -198,8 +198,8 @@
                     :class="[
                       'px-2.5 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1',
                       item.type === 'inflow'
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                        : 'bg-rose-50 text-rose-700 border border-rose-200',
+                        ? 'bg-emerald-50 text-emerald-800 border border-emerald-300'
+                        : 'bg-rose-50 text-rose-800 border border-rose-300',
                     ]"
                   >
                     <component :is="item.type === 'inflow' ? ArrowDownLeft : ArrowUpRight" aria-hidden="true" :size="12" />
@@ -217,7 +217,7 @@
                 </span>
               </td>
 
-              <td class="px-5 py-4 text-right whitespace-nowrap font-bold" :class="item.type === 'inflow' ? 'text-emerald-600' : 'text-rose-600'">
+              <td class="px-5 py-4 text-right whitespace-nowrap font-bold" :class="item.type === 'inflow' ? 'text-emerald-700' : 'text-rose-700'">
                 {{ item.type === 'inflow' ? '+' : '-' }} {{ formatRupiah(item.nominal) }}
               </td>
 
@@ -228,7 +228,7 @@
                     :data-testid="`view-cashflow-${item.id}`"
                     aria-label="Lihat detail transaksi"
                     @click="router.push(`/cash-flows/${item.id}`)"
-                    class="p-2 text-slate-400 hover:text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
+                    class="p-2 text-slate-600 hover:text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
                     title="Lihat Detail"
                   >
                     <Eye aria-hidden="true" :size="16" />
@@ -238,7 +238,7 @@
                     :data-testid="`edit-cashflow-${item.id}`"
                     aria-label="Ubah catatan transaksi"
                     @click="openEditModal(item)"
-                    class="p-2 text-slate-400 hover:text-amber-600 rounded-lg hover:bg-amber-50 transition-colors"
+                    class="p-2 text-slate-600 hover:text-amber-700 rounded-lg hover:bg-amber-50 transition-colors"
                     title="Ubah"
                   >
                     <Edit3 aria-hidden="true" :size="16" />
@@ -248,7 +248,7 @@
                     :data-testid="`delete-cashflow-${item.id}`"
                     aria-label="Hapus catatan transaksi"
                     @click="handleDelete(item.id)"
-                    class="p-2 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors"
+                    class="p-2 text-slate-600 hover:text-rose-700 rounded-lg hover:bg-rose-50 transition-colors"
                     title="Hapus"
                   >
                     <Trash2 aria-hidden="true" :size="16" />

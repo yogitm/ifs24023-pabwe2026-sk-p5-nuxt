@@ -49,7 +49,7 @@
             <p class="text-xs font-semibold text-slate-800 leading-tight">
               {{ profile?.name }}
             </p>
-            <p class="text-[11px] text-slate-400 leading-tight">
+            <p class="text-[11px] text-slate-600 leading-tight">
               {{ profile?.email }}
             </p>
           </div>
@@ -60,7 +60,7 @@
           data-testid="logout-btn"
           aria-label="Keluar dari akun"
           @click="handleLogout"
-          class="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors border border-transparent hover:border-rose-100"
+          class="p-2 rounded-lg text-slate-600 hover:text-rose-600 hover:bg-rose-50 transition-colors border border-transparent hover:border-rose-100"
           title="Keluar"
         >
           <LogOut aria-hidden="true" :size="18" />

@@ -5,7 +5,7 @@ const customPort = Number(process.env.APP_PORT || process.env.PORT) || 3000;
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   telemetry: false,
 
   // Disable SSR for SPA mode (client-side routing and storage)
@@ -29,13 +29,19 @@ export default defineNuxtConfig({
       ),
     },
     build: {
-      chunkSizeWarningLimit: 1500,
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
           manualChunks(id) {
             if (id.includes("node_modules")) {
-              if (id.includes("@toast-ui")) {
-                return "toast-ui";
+              if (id.includes("sweetalert2")) {
+                return "sweetalert2";
+              }
+              if (id.includes("lucide-vue-next")) {
+                return "icons";
+              }
+              if (id.includes("vue") || id.includes("pinia")) {
+                return "vue-core";
               }
               return "vendor";
             }
@@ -53,6 +59,18 @@ export default defineNuxtConfig({
     devPort: customPort,
     externals: {
       inline: ["@vue/shared"],
+    },
+    routeRules: {
+      "/**": {
+        headers: {
+          "Cache-Control": "public, max-age=0, must-revalidate",
+        },
+      },
+      "/_nuxt/**": {
+        headers: {
+          "Cache-Control": "public, max-age=31536000, immutable",
+        },
+      },
     },
   },
 
@@ -122,8 +140,21 @@ export default defineNuxtConfig({
           crossorigin: "",
         },
         {
+          rel: "preload",
+          as: "style",
+          href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap",
+        },
+        {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap",
+          media: "print",
+          onload: "this.media='all'",
+        },
+      ],
+      noscript: [
+        {
+          innerHTML:
+            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap">',
         },
       ],
       bodyAttrs: {
