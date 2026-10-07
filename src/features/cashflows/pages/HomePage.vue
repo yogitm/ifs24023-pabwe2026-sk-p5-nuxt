@@ -15,19 +15,21 @@
         <button
           type="button"
           data-testid="reset-all-cashflows-btn"
+          aria-label="Reset Semua Catatan Arus Kas"
           @click="handleDeleteAll"
           class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 transition-colors"
         >
-          <RotateCcw :size="16" />
+          <RotateCcw aria-hidden="true" :size="16" />
           <span>Reset Semua</span>
         </button>
         <button
           type="button"
           data-testid="add-cashflow-btn"
+          aria-label="Catat Transaksi Baru"
           @click="showAddModal = true"
           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-600/25 transition-all"
         >
-          <Plus :size="18" />
+          <Plus aria-hidden="true" :size="18" />
           <span>Catat Transaksi</span>
         </button>
       </div>
@@ -39,7 +41,7 @@
       <div class="p-5 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-lg shadow-emerald-900/10">
         <div class="flex items-center justify-between opacity-85">
           <span class="text-xs font-bold uppercase tracking-wider">Saldo Bersih</span>
-          <Wallet :size="20" />
+          <Wallet aria-hidden="true" :size="20" />
         </div>
         <p class="text-2xl sm:text-3xl font-black mt-2 tracking-tight">
           {{ formatRupiah(statsNet) }}
@@ -54,7 +56,7 @@
         <div class="flex items-center justify-between text-emerald-600">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Pemasukan</span>
           <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-            <ArrowDownLeft :size="18" />
+            <ArrowDownLeft aria-hidden="true" :size="18" />
           </div>
         </div>
         <p class="text-2xl font-black text-slate-800 mt-2 tracking-tight">
@@ -68,7 +70,7 @@
         <div class="flex items-center justify-between text-rose-600">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Pengeluaran</span>
           <div class="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center">
-            <ArrowUpRight :size="18" />
+            <ArrowUpRight aria-hidden="true" :size="18" />
           </div>
         </div>
         <p class="text-2xl font-black text-slate-800 mt-2 tracking-tight">
@@ -83,10 +85,13 @@
       <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         <!-- Live Search Input -->
         <div class="relative flex-1">
-          <Search :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <label for="search-cashflow-input" class="sr-only">Cari Transaksi</label>
+          <Search aria-hidden="true" :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
+            id="search-cashflow-input"
             data-testid="search-cashflow-input"
+            aria-label="Cari transaksi berdasarkan label atau keterangan"
             v-model="searchQuery"
             placeholder="Cari transaksi berdasarkan label atau keterangan..."
             class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
@@ -95,8 +100,11 @@
 
         <!-- Filter Dropdowns -->
         <div class="flex flex-wrap items-center gap-2">
+          <label for="filter-type-select" class="sr-only">Filter Jenis Transaksi</label>
           <select
+            id="filter-type-select"
             data-testid="filter-type-select"
+            aria-label="Filter Berdasarkan Jenis Transaksi"
             v-model="typeFilter"
             class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold bg-white text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20"
           >
@@ -105,8 +113,11 @@
             <option value="outflow">Pengeluaran</option>
           </select>
 
+          <label for="filter-source-select" class="sr-only">Filter Sumber Dana</label>
           <select
+            id="filter-source-select"
             data-testid="filter-source-select"
+            aria-label="Filter Berdasarkan Sumber Dana"
             v-model="sourceFilter"
             class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold bg-white text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20"
           >
@@ -120,6 +131,7 @@
             v-if="typeFilter || sourceFilter || searchQuery"
             type="button"
             data-testid="reset-filter-btn"
+            aria-label="Reset Filter Transaksi"
             @click="resetFilters"
             class="px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
           >
@@ -131,7 +143,7 @@
 
     <!-- Loading State -->
     <div v-if="loading" class="py-16 text-center text-slate-400">
-      <Loader2 :size="32" class="animate-spin text-emerald-600 mx-auto mb-2" />
+      <Loader2 aria-hidden="true" :size="32" class="animate-spin text-emerald-600 mx-auto mb-2" />
       <p class="text-sm font-semibold">Memuat catatan arus kas...</p>
     </div>
 
@@ -142,7 +154,7 @@
       class="p-12 text-center rounded-2xl bg-white border border-dashed border-slate-200"
     >
       <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3">
-        <Receipt :size="28" />
+        <Receipt aria-hidden="true" :size="28" />
       </div>
       <h3 class="text-base font-bold text-slate-800">Belum Ada Catatan Transaksi</h3>
       <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
@@ -162,11 +174,11 @@
         <table class="w-full text-left text-sm">
           <thead class="bg-slate-50/75 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
             <tr>
-              <th class="px-5 py-3.5">Tanggal</th>
-              <th class="px-5 py-3.5">Kategori / Keterangan</th>
-              <th class="px-5 py-3.5">Sumber</th>
-              <th class="px-5 py-3.5 text-right">Nominal</th>
-              <th class="px-5 py-3.5 text-center">Aksi</th>
+              <th scope="col" class="px-5 py-3.5">Tanggal</th>
+              <th scope="col" class="px-5 py-3.5">Kategori / Keterangan</th>
+              <th scope="col" class="px-5 py-3.5">Sumber</th>
+              <th scope="col" class="px-5 py-3.5 text-right">Nominal</th>
+              <th scope="col" class="px-5 py-3.5 text-center">Aksi</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
@@ -190,7 +202,7 @@
                         : 'bg-rose-50 text-rose-700 border border-rose-200',
                     ]"
                   >
-                    <component :is="item.type === 'inflow' ? ArrowDownLeft : ArrowUpRight" :size="12" />
+                    <component :is="item.type === 'inflow' ? ArrowDownLeft : ArrowUpRight" aria-hidden="true" :size="12" />
                     {{ item.label }}
                   </span>
                 </div>
@@ -214,29 +226,32 @@
                   <button
                     type="button"
                     :data-testid="`view-cashflow-${item.id}`"
+                    aria-label="Lihat detail transaksi"
                     @click="router.push(`/cash-flows/${item.id}`)"
                     class="p-2 text-slate-400 hover:text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
                     title="Lihat Detail"
                   >
-                    <Eye :size="16" />
+                    <Eye aria-hidden="true" :size="16" />
                   </button>
                   <button
                     type="button"
                     :data-testid="`edit-cashflow-${item.id}`"
+                    aria-label="Ubah catatan transaksi"
                     @click="openEditModal(item)"
                     class="p-2 text-slate-400 hover:text-amber-600 rounded-lg hover:bg-amber-50 transition-colors"
                     title="Ubah"
                   >
-                    <Edit3 :size="16" />
+                    <Edit3 aria-hidden="true" :size="16" />
                   </button>
                   <button
                     type="button"
                     :data-testid="`delete-cashflow-${item.id}`"
+                    aria-label="Hapus catatan transaksi"
                     @click="handleDelete(item.id)"
                     class="p-2 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors"
                     title="Hapus"
                   >
-                    <Trash2 :size="16" />
+                    <Trash2 aria-hidden="true" :size="16" />
                   </button>
                 </div>
               </td>

@@ -8,14 +8,14 @@
           data-testid="toggle-sidebar-btn"
           @click="$emit('toggleSidebar')"
           class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-          aria-label="Menu"
+          aria-label="Toggle Navigation"
         >
-          <Menu :size="20" />
+          <Menu aria-hidden="true" :size="20" />
         </button>
 
         <RouterLink to="/" class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-xs">
-            <Wallet :size="20" />
+            <Wallet aria-hidden="true" :size="20" />
           </div>
           <span class="text-base sm:text-lg font-bold text-slate-900">
             Delcom Cash Flow
@@ -28,16 +28,19 @@
         <RouterLink
           to="/profile"
           data-testid="navbar-profile-link"
+          aria-label="Lihat profil saya"
           class="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
         >
           <img
             v-if="profile?.photo"
             :src="profile.photo"
-            :alt="profile.name"
+            :alt="profile?.name ? `Foto profil ${profile.name}` : 'Foto profil'"
             class="w-7 h-7 rounded-full object-cover border border-slate-200"
           />
           <div
             v-else
+            role="img"
+            aria-label="Inisial profil pengguna"
             class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center"
           >
             {{ profileInitial }}
@@ -55,11 +58,12 @@
         <button
           type="button"
           data-testid="logout-btn"
+          aria-label="Keluar dari akun"
           @click="handleLogout"
           class="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors border border-transparent hover:border-rose-100"
           title="Keluar"
         >
-          <LogOut :size="18" />
+          <LogOut aria-hidden="true" :size="18" />
         </button>
       </div>
     </div>

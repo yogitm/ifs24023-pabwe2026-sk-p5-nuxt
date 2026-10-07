@@ -20,26 +20,32 @@
         <img
           v-if="profile.photo"
           :src="profile.photo"
-          :alt="profile.name"
+          :alt="profile.name ? `Foto profil ${profile.name}` : 'Foto profil'"
           class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md ring-2 ring-indigo-100"
         />
         <div
           v-else
+          role="img"
+          aria-label="Inisial profil pengguna"
           class="w-24 h-24 rounded-full bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white flex items-center justify-center font-bold text-3xl shadow-md"
         >
           {{ profile.name ? profile.name.charAt(0).toUpperCase() : "U" }}
         </div>
 
         <label
+          for="profile-photo-file-input"
           data-testid="upload-profile-photo-btn"
+          aria-label="Ubah Foto Profil"
           class="absolute bottom-0 right-0 p-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-md cursor-pointer transition-transform hover:scale-105"
           title="Ubah Foto Profil"
         >
-          <Loader2 v-if="loadingPhoto" :size="16" class="animate-spin" />
-          <Camera v-else :size="16" />
+          <Loader2 v-if="loadingPhoto" aria-hidden="true" :size="16" class="animate-spin" />
+          <Camera v-else aria-hidden="true" :size="16" />
           <input
+            id="profile-photo-file-input"
             type="file"
             data-testid="profile-photo-file-input"
+            aria-label="Unggah berkas foto profil"
             accept="image/*"
             @change="handlePhotoUpload"
             class="hidden"
@@ -52,7 +58,7 @@
         <p class="text-sm text-slate-500">{{ profile.email }}</p>
         <div class="pt-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200/60">
-            <Check :size="14" /> Terverifikasi
+            <Check aria-hidden="true" :size="14" /> Terverifikasi
           </span>
         </div>
       </div>
@@ -63,35 +69,39 @@
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-5">
         <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
           <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
-            <User :size="18" />
+            <User aria-hidden="true" :size="18" />
           </div>
           <h3 class="font-bold text-slate-800">Ubah Biodata</h3>
         </div>
 
         <form @submit.prevent="handleUpdateProfile" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label for="profile-name-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Nama Lengkap
             </label>
             <input
+              id="profile-name-input"
               type="text"
               data-testid="profile-name-input"
               v-model="name"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               required
+              aria-required="true"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label for="profile-email-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Alamat Email
             </label>
             <input
+              id="profile-email-input"
               type="email"
               data-testid="profile-email-input"
               v-model="email"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               required
+              aria-required="true"
             />
           </div>
 
@@ -99,11 +109,12 @@
             <button
               type="submit"
               data-testid="submit-profile-btn"
+              aria-label="Simpan Perubahan Biodata"
               :disabled="loadingProfile"
               class="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-xl shadow-md shadow-indigo-600/25 transition-all disabled:opacity-60"
             >
               <template v-if="loadingProfile">
-                <Loader2 :size="18" class="animate-spin" />
+                <Loader2 aria-hidden="true" :size="18" class="animate-spin" />
                 <span>Menyimpan Perubahan...</span>
               </template>
               <span v-else>Simpan Perubahan</span>
@@ -116,51 +127,57 @@
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-5">
         <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
           <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-            <ShieldCheck :size="18" />
+            <ShieldCheck aria-hidden="true" :size="18" />
           </div>
           <h3 class="font-bold text-slate-800">Keamanan & Password</h3>
         </div>
 
         <form @submit.prevent="handleUpdatePassword" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label for="current-password-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Kata Sandi Saat Ini
             </label>
             <input
+              id="current-password-input"
               type="password"
               data-testid="current-password-input"
               v-model="oldPassword"
               placeholder="••••••"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               required
+              aria-required="true"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label for="new-password-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Kata Sandi Baru
             </label>
             <input
+              id="new-password-input"
               type="password"
               data-testid="new-password-input"
               v-model="newPassword"
               placeholder="Minimal 6 karakter"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               required
+              aria-required="true"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+            <label for="confirm-password-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
               Ulangi Kata Sandi Baru
             </label>
             <input
+              id="confirm-password-input"
               type="password"
               data-testid="confirm-password-input"
               v-model="newPasswordConfirmation"
               placeholder="Konfirmasi kata sandi"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               required
+              aria-required="true"
             />
           </div>
 
@@ -168,11 +185,12 @@
             <button
               type="submit"
               data-testid="submit-password-btn"
+              aria-label="Perbarui Kata Sandi"
               :disabled="loadingPassword"
               class="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 active:bg-slate-950 rounded-xl shadow-md transition-all disabled:opacity-60"
             >
               <template v-if="loadingPassword">
-                <Loader2 :size="18" class="animate-spin" />
+                <Loader2 aria-hidden="true" :size="18" class="animate-spin" />
                 <span>Memperbarui Password...</span>
               </template>
               <span v-else>Perbarui Password</span>

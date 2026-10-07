@@ -5,10 +5,11 @@
       <button
         type="button"
         data-testid="back-to-home-btn"
+        aria-label="Kembali ke Beranda"
         @click="router.push('/')"
         class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-slate-600 bg-white hover:bg-slate-50 border border-slate-200 transition-colors shadow-xs"
       >
-        <ArrowLeft :size="18" />
+        <ArrowLeft aria-hidden="true" :size="18" />
         <span>Kembali ke Beranda</span>
       </button>
 
@@ -17,19 +18,21 @@
         <button
           type="button"
           data-testid="edit-detail-btn"
+          aria-label="Ubah Catatan Transaksi"
           @click="showEditModal = true"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors"
         >
-          <Edit3 :size="16" />
+          <Edit3 aria-hidden="true" :size="16" />
           <span>Ubah</span>
         </button>
         <button
           type="button"
           data-testid="delete-detail-btn"
+          aria-label="Hapus Catatan Transaksi"
           @click="handleDelete"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors"
         >
-          <Trash2 :size="16" />
+          <Trash2 aria-hidden="true" :size="16" />
           <span>Hapus</span>
         </button>
       </div>
@@ -37,7 +40,7 @@
 
     <!-- Loading State -->
     <div v-if="!cashFlow" class="p-16 text-center text-slate-400 bg-white rounded-3xl border border-slate-200/80">
-      <Loader2 :size="32" class="animate-spin text-emerald-600 mx-auto mb-2" />
+      <Loader2 aria-hidden="true" :size="32" class="animate-spin text-emerald-600 mx-auto mb-2" />
       <p class="text-sm font-semibold">Memuat rincian transaksi...</p>
     </div>
 
@@ -54,7 +57,7 @@
                 : 'bg-rose-600 text-white shadow-rose-600/20',
             ]"
           >
-            <component :is="cashFlow.type === 'inflow' ? ArrowDownLeft : ArrowUpRight" :size="24" />
+            <component :is="cashFlow.type === 'inflow' ? ArrowDownLeft : ArrowUpRight" aria-hidden="true" :size="24" />
           </div>
           <div>
             <div class="flex items-center gap-2">

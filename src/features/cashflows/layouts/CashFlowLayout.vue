@@ -14,7 +14,7 @@
       @close="sidebarOpen = false"
     />
 
-    <main class="pt-16 md:pl-64 transition-all">
+    <main role="main" class="pt-16 md:pl-64 transition-all">
       <div class="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
         <RouterView />
       </div>

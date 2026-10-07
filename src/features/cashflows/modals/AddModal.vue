@@ -4,25 +4,31 @@
     data-testid="add-cashflow-modal"
     class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-xs overflow-y-auto"
   >
-    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden my-8">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="add-modal-title"
+      class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden my-8"
+    >
       <!-- Modal Header -->
       <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
-            <Plus :size="20" />
+            <Plus aria-hidden="true" :size="20" />
           </div>
           <div>
-            <h3 class="text-base font-bold text-slate-800">Catat Arus Kas Baru</h3>
+            <h3 id="add-modal-title" class="text-base font-bold text-slate-800">Catat Arus Kas Baru</h3>
             <p class="text-xs text-slate-400">Tambahkan catatan pemasukan atau pengeluaran</p>
           </div>
         </div>
         <button
           type="button"
           data-testid="close-add-modal-btn"
+          aria-label="Tutup dialog"
           @click="handleClose"
           class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors"
         >
-          <X :size="18" />
+          <X aria-hidden="true" :size="18" />
         </button>
       </div>
 
@@ -37,6 +43,7 @@
             <button
               type="button"
               data-testid="type-inflow-btn"
+              :aria-pressed="type === 'inflow'"
               @click="type = 'inflow'"
               :class="[
                 'p-3 rounded-xl border text-center font-bold text-sm transition-all flex items-center justify-center gap-2',
@@ -45,12 +52,13 @@
                   : 'border-slate-200 text-slate-600 hover:bg-slate-50',
               ]"
             >
-              <ArrowDownLeft :size="16" />
+              <ArrowDownLeft aria-hidden="true" :size="16" />
               <span>Pemasukan</span>
             </button>
             <button
               type="button"
               data-testid="type-outflow-btn"
+              :aria-pressed="type === 'outflow'"
               @click="type = 'outflow'"
               :class="[
                 'p-3 rounded-xl border text-center font-bold text-sm transition-all flex items-center justify-center gap-2',
@@ -59,7 +67,7 @@
                   : 'border-slate-200 text-slate-600 hover:bg-slate-50',
               ]"
             >
-              <ArrowUpRight :size="16" />
+              <ArrowUpRight aria-hidden="true" :size="16" />
               <span>Pengeluaran</span>
             </button>
           </div>
@@ -67,12 +75,14 @@
 
         <!-- Source Selection -->
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <label for="source-select" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
             Sumber Dana <span class="text-rose-500">*</span>
           </label>
           <select
+            id="source-select"
             data-testid="source-select"
             v-model="source"
+            aria-required="true"
             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
           >
             <option value="cash">Tunai (Cash)</option>
@@ -83,13 +93,15 @@
 
         <!-- Label / Category -->
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <label for="label-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
             Label / Kategori <span class="text-rose-500">*</span>
           </label>
           <input
             type="text"
+            id="label-input"
             data-testid="label-input"
             v-model="label"
+            aria-required="true"
             placeholder="Contoh: gaji, makanan, transportasi"
             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
           />
@@ -100,7 +112,7 @@
 
         <!-- Nominal -->
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <label for="nominal-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
             Nominal (Rupiah) <span class="text-rose-500">*</span>
           </label>
           <div class="relative">
@@ -109,8 +121,10 @@
             </span>
             <input
               type="number"
+              id="nominal-input"
               data-testid="nominal-input"
               v-model="nominal"
+              aria-required="true"
               placeholder="0"
               min="1"
               class="w-full pl-12 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-semibold"
@@ -123,12 +137,14 @@
 
         <!-- Description -->
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <label for="description-input" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
             Keterangan / Deskripsi <span class="text-rose-500">*</span>
           </label>
           <textarea
+            id="description-input"
             data-testid="description-input"
             v-model="description"
+            aria-required="true"
             rows="3"
             placeholder="Tuliskan catatan transaksi ini secara lengkap..."
             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 resize-none"
@@ -143,6 +159,7 @@
           <button
             type="button"
             data-testid="cancel-add-btn"
+            aria-label="Batal"
             @click="handleClose"
             class="px-5 py-2.5 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors"
           >
@@ -151,10 +168,11 @@
           <button
             type="submit"
             data-testid="submit-add-btn"
+            aria-label="Simpan Transaksi"
             :disabled="isSubmitting"
             class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 transition-colors shadow-md shadow-emerald-500/25"
           >
-            <Loader2 v-if="isSubmitting" :size="16" class="animate-spin" />
+            <Loader2 v-if="isSubmitting" aria-hidden="true" :size="16" class="animate-spin" />
             <span>{{ isSubmitting ? 'Menyimpan...' : 'Simpan Transaksi' }}</span>
           </button>
         </div>

@@ -58,10 +58,61 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Delcom Cash Flow",
+      title: "Delcom Cash Flow - Manajemen Arus Kas",
       htmlAttrs: {
         lang: "id",
       },
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+        {
+          name: "description",
+          content:
+            "Delcom Cash Flow - Aplikasi pencatatan dan pengelolaan arus kas transaksi pemasukan dan pengeluaran secara mudah, cepat, dan transparan.",
+        },
+        {
+          name: "keywords",
+          content:
+            "cash flow, arus kas, keuangan, pencatatan transaksi, delcom cash flow, pabwe, institut teknologi del",
+        },
+        { name: "author", content: "Delcom Cash Flow Team" },
+        { name: "robots", content: "index, follow" },
+        { name: "theme-color", content: "#0d9488" },
+        {
+          property: "og:type",
+          content: "website",
+        },
+        {
+          property: "og:title",
+          content: "Delcom Cash Flow - Manajemen Arus Kas",
+        },
+        {
+          property: "og:description",
+          content:
+            "Aplikasi pencatatan dan pengelolaan arus kas transaksi pemasukan dan pengeluaran secara mudah, cepat, dan transparan.",
+        },
+        {
+          property: "og:image",
+          content: "/logo.svg",
+        },
+        {
+          name: "twitter:card",
+          content: "summary",
+        },
+        {
+          name: "twitter:title",
+          content: "Delcom Cash Flow - Manajemen Arus Kas",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "Aplikasi pencatatan dan pengelolaan arus kas transaksi pemasukan dan pengeluaran secara mudah, cepat, dan transparan.",
+        },
+        {
+          name: "twitter:image",
+          content: "/logo.svg",
+        },
+      ],
       link: [
         { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
